@@ -65,7 +65,13 @@ var basicQnAMakerDialog = new builder_cognitiveservices.QnAMakerDialog({
 }
 );
 
-
+bot.dialog('greeting',
+    [
+        function (session) {
+            session.send("Hey There! Welcome to Tinqer!");
+        }
+    ]
+);
 
 
 bot.dialog('basicQnAMakerDialog', basicQnAMakerDialog);
@@ -77,7 +83,6 @@ bot.dialog('/', //basicQnAMakerDialog);
             var qnaAuthKey = process.env.QnAAuthKey || process.env.QnASubscriptionKey;
             var endpointHostName = process.env.QnAEndpointHostName;
 
-            session.send("Hey There! Welcome to Tinqer!");
             // QnA Subscription Key and KnowledgeBase Id null verification
             if ((qnaAuthKey == null || qnaAuthKey == '') || (qnaKnowledgebaseId == null || qnaKnowledgebaseId == ''))
                 session.send('Please set QnAKnowledgebaseId, QnAAuthKey and QnAEndpointHostName (if applicable) in App Settings. Learn how to get them at https://aka.ms/qnaabssetup.');
