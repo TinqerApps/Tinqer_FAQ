@@ -65,13 +65,15 @@ var basicQnAMakerDialog = new builder_cognitiveservices.QnAMakerDialog({
 }
 );
 
-bot.dialog('greeting',
-    [
-        function (session) {
-            session.send("Hey There! Welcome to Tinqer!");
-        }
-    ]
-);
+//Greeting
+bot.on('conversationUpdate', function(message){
+    if(message.membersAdded){
+        message.membersAdded.forEach(function(identity){
+            var reply = new builder.Message().address(Object.create(message.address)).text("Hey There! Welcome to Tinqer! How can I help you?");
+            bot.send(reply);
+        })
+    }
+});
 
 
 bot.dialog('basicQnAMakerDialog', basicQnAMakerDialog);
